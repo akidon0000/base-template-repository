@@ -1,14 +1,14 @@
 # テンプレートリポジトリを毎週月曜日の午前9時に自動で同期するためのワークフロー
 # https://github.com/AndreasAugustin/actions-template-sync を参照してください
 
-name: Template-repo sync
+name: Sync Template
 on:
     workflow_dispatch:
     schedule:
         - cron: "0 9 * * 1"
 
 jobs:
-  repo-sync:
+  sync-repo:
     permissions:
       contents: write
       pull-requests: write
