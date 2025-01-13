@@ -1,0 +1,27 @@
+# テンプレートリポジトリを毎週月曜日の午前9時に自動で同期するためのワークフロー
+# https://github.com/AndreasAugustin/actions-template-sync を参照してください
+
+name: Template-repo sync
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: "0 9 * * 1"
+
+jobs:
+  repo-sync:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: actions-template-sync
+        uses: AndreasAugustin/actions-template-sync@v2
+        with:
+          source_repo_path: akidon0000/base-template-repository
+          upstream_branch: main
+          pr_labels: template_sync
+          pr_title: "[actions-template-sync] Upstream template update"
+          pr_commit_msg: "chore(template): upstream template update"
